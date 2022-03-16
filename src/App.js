@@ -27,7 +27,7 @@ export default function App() {
           </li>
         ))}
       </StyledUl>
-      <EntryForm labelText="Add an Entry: " />
+      <EntryForm />
     </AppWrapper>
   );
 }

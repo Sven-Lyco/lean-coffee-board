@@ -1,32 +1,32 @@
-import { useState } from 'react';
 import styled from 'styled-components';
+import ScreenReaderOnly from './ScreenReaderOnly';
 
-export default function EntryForm({ labelText, onAddEntry }) {
-  const [entryText, setEntryText] = useState('');
-
+export default function EntryForm({ onSubmit }) {
   return (
-    <StyledForm onSubmit={handleSubmit}>
-      {/* <label htmlFor="entry-form">{labelText}</label> */}
+    <StyledForm onSubmit={handleSubmit} aria-labelledby="entry-form-name">
+      <label htmlFor="entryForm">
+        <ScreenReaderOnly>Entry text</ScreenReaderOnly>
+      </label>
       <input
-        id="entry-form"
-        name="entry-form"
+        id="entryForm"
+        name="entryForm"
         placeholder="Write your text here..."
         type="text"
-        value={entryText}
-        onChange={event => setEntryText(event.target.value)}
-        aria-label="Add an Entry"
         autoComplete="off"
         required
       />
-      <button>+</button>
+      <button id="entry-form-name">
+        <ScreenReaderOnly>Create new entry</ScreenReaderOnly>
+        <div aria-hidden="true">+</div>
+      </button>
     </StyledForm>
   );
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(entryText);
-    //onAddEntry(entryText);
-    setEntryText('');
+    const form = event.target;
+    const inputElement = form.elements.entryForm;
+    onSubmit(inputElement.value);
   }
 }
 
