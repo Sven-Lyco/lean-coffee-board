@@ -35,7 +35,7 @@ export default function App() {
 
   async function handleNewEntry(text) {
     const newEntry = {
-      text,
+      text: text,
       author: 'Anonymous',
     };
 
@@ -76,6 +76,6 @@ const EntryList = styled.ul`
   overflow-y: auto;
   list-style: none;
   gap: 20px;
-  margin: 0px 20px;
-  padding: 0;
+  margin: 0px 0px;
+  padding: 0 20px 12px;
 `;
