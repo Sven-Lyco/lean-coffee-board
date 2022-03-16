@@ -57,6 +57,12 @@ const StyledForm = styled.form`
     line-height: 0;
     font-size: 30px;
 
+    &:hover {
+      background-color: black;
+      color: white;
+      transition: 0.4s;
+    }
+
     &:active {
       background-color: black;
       color: white;
