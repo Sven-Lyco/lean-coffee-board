@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import Entry from './components/Entry';
 import EntryForm from './components/EntryForm';
+import LoadingCircle from './components/LoadingCircle';
 
 const fetcher = (...args) => fetch(...args).then(res => res.json());
 
@@ -20,14 +21,17 @@ export default function App() {
   return (
     <AppWrapper>
       <StyledHeader>Lean Coffee Board</StyledHeader>
+      <StyledSubHeader>Lean Coffee</StyledSubHeader>
       <EntryList role="list">
-        {entries
-          ? entries.map(({ text, author, _id, tempId }) => (
-              <li key={_id ?? tempId}>
-                <Entry text={text} author={author} />
-              </li>
-            ))
-          : '... loading ...'}
+        {entries ? (
+          entries.map(({ text, author, _id, tempId }) => (
+            <li key={_id ?? tempId}>
+              <Entry text={text} author={author} />
+            </li>
+          ))
+        ) : (
+          <LoadingCircle />
+        )}
       </EntryList>
       <EntryForm onSubmit={handleNewEntry} />
     </AppWrapper>
@@ -57,7 +61,7 @@ export default function App() {
 const AppWrapper = styled.div`
   display: grid;
   height: 100vh;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: 60px 85px auto 48px;
 `;
 
 const StyledHeader = styled.h1`
@@ -68,6 +72,17 @@ const StyledHeader = styled.h1`
   font-family: 'Lobster', sans-serif;
   padding: 5px 0px;
   margin: 0;
+`;
+
+const StyledSubHeader = styled.h2`
+  color: #27322f;
+  padding: 10px;
+  margin: 25px 16px 16px;
+  border-top: 4px solid #27322f;
+
+  &:hover {
+    transition: #00e7c2 0.25s linear;
+  }
 `;
 
 const EntryList = styled.ul`
