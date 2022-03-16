@@ -42,7 +42,7 @@ const StyledHeader = styled.h1`
   background-color: #00e7c2;
   color: white;
   text-align: center;
-  box-shadow: 0 4px 8px 0 rgba(39, 50, 47, 0.15);
+  box-shadow: 0 4px 8px 0 rgba(39, 50, 47, 0.25);
   font-family: 'Lobster', sans-serif;
   padding: 0px 0px;
   margin: 0;
