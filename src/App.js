@@ -20,16 +20,26 @@ export default function App() {
   return (
     <AppWrapper>
       <StyledHeader>Lean Coffee Board</StyledHeader>
-      <StyledUl role="list">
+      <EntryList role="list">
         {entries.map(({ text, author }, index) => (
           <li key={index}>
             <Entry text={text} author={author} />
           </li>
         ))}
-      </StyledUl>
-      <EntryForm />
+      </EntryList>
+      <EntryForm onSubmit={handleNewEntry} />
     </AppWrapper>
   );
+
+  async function handleNewEntry(text) {
+    const response = await fetch('/api/entries.mjs', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text: text, author: 'Sven' }),
+    });
+    const newEntry = await response.json();
+    setEntries([...entries, newEntry]);
+  }
 }
 
 const AppWrapper = styled.div`
@@ -47,7 +57,7 @@ const StyledHeader = styled.h1`
   padding: 0px 0px;
   margin: 0;
 `;
-const StyledUl = styled.ul`
+const EntryList = styled.ul`
   overflow-y: auto;
   display: grid;
   list-style: none;
