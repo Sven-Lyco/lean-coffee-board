@@ -4,12 +4,12 @@ import ScreenReaderOnly from './ScreenReaderOnly';
 export default function EntryForm({ onSubmit }) {
   return (
     <StyledForm onSubmit={handleSubmit} aria-labelledby="entry-form-name">
-      <label htmlFor="entryForm">
+      <label htmlFor="entry-form">
         <ScreenReaderOnly>Entry text</ScreenReaderOnly>
       </label>
       <input
-        id="entryForm"
-        name="entryForm"
+        id="entry-form"
+        name="entry-form"
         placeholder="Write your text here..."
         type="text"
         autoComplete="off"
@@ -25,7 +25,7 @@ export default function EntryForm({ onSubmit }) {
   function handleSubmit(event) {
     event.preventDefault();
     const form = event.target;
-    const inputElement = form.elements.entryForm;
+    const inputElement = form.elements['entry-form'];
     onSubmit(inputElement.value);
   }
 }
