@@ -27,6 +27,7 @@ export default function EntryForm({ onSubmit }) {
     const form = event.target;
     const inputElement = form.elements['entry-form'];
     onSubmit(inputElement.value);
+    form.reset();
   }
 }
 
@@ -55,6 +56,12 @@ const StyledForm = styled.form`
     padding-bottom: 7px;
     line-height: 0;
     font-size: 30px;
+
+    &:hover {
+      background-color: black;
+      color: white;
+      transition: 0.4s;
+    }
 
     &:active {
       background-color: black;
