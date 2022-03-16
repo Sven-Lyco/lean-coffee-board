@@ -18,7 +18,7 @@ export default function EntryForm({ labelText, onAddEntry }) {
         autoComplete="off"
         required
       />
-      <button aria-label="Add Entry">+</button>
+      <button>+</button>
     </StyledForm>
   );
 
@@ -57,12 +57,6 @@ const StyledForm = styled.form`
     font-size: 30px;
 
     &:active {
-      background-color: black;
-      color: white;
-      transition: 0.4s;
-    }
-
-    &:hover {
       background-color: black;
       color: white;
       transition: 0.4s;

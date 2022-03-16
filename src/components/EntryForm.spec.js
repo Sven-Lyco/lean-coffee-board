@@ -8,7 +8,7 @@ describe('EntryForm', () => {
     const textInput = screen.getByLabelText(/entry/i);
     expect(textInput).toBeInTheDocument();
 
-    const submitButton = screen.getByRole('button', { name: /add/i });
+    const submitButton = screen.getByRole('button', { name: '+' });
     expect(submitButton).toBeInTheDocument();
   });
 });
