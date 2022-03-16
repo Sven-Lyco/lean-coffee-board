@@ -10,7 +10,7 @@ export default function EntryForm({ onSubmit }) {
       <input
         id="entry-form"
         name="entry-form"
-        placeholder="Write your text here..."
+        placeholder="Add lean coffee note..."
         type="text"
         autoComplete="off"
         required
@@ -44,6 +44,7 @@ const StyledForm = styled.form`
     outline: none;
     ::placeholder {
       color: #c8cbca;
+      text-transform: uppercase;
     }
   }
   button {
