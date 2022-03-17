@@ -22,7 +22,7 @@ const Card = styled.section`
 
 const Author = styled.p`
   margin: 0;
-  text-transform: uppercase;
+  text-transform: capitalize;
   font-size: 1rem;
   color: #999;
 `;
