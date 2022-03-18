@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import ScreenReaderOnly from './ScreenReaderOnly';
 
+import { VscAdd } from 'react-icons/vsc';
+
 export default function EntryForm({ onSubmit }) {
   return (
     <StyledForm onSubmit={handleSubmit} aria-labelledby="entry-form-name">
@@ -18,7 +20,7 @@ export default function EntryForm({ onSubmit }) {
       />
       <button id="entry-form-name">
         <ScreenReaderOnly>Create new entry</ScreenReaderOnly>
-        <div aria-hidden="true">+</div>
+        <VscAdd aria-hidden="true" />
       </button>
     </StyledForm>
   );
@@ -52,11 +54,10 @@ const StyledForm = styled.form`
     background-color: white;
     border: 2px solid black;
     border-radius: 50%;
-    width: 32px;
-    height: 32px;
-    margin: 8px;
-    padding-bottom: 7px;
-    line-height: 0;
+    width: 40px;
+    height: 40px;
+    margin: 4px;
+    padding-top: 4px;
     font-size: 30px;
 
     &:hover {
