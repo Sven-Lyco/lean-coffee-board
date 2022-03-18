@@ -1,13 +1,18 @@
 import useSWR from 'swr';
 import styled from 'styled-components';
 
+import Login from './components/Login';
 import Entry from './components/Entry';
 import EntryForm from './components/EntryForm';
 import LoadingCircle from './components/LoadingCircle';
+import { useState } from 'react';
 
 const fetcher = (...args) => fetch(...args).then(res => res.json());
 
 export default function App() {
+  const [userColor, setUserColor] = useState('');
+  const [userName, setUserName] = useState('');
+
   const {
     data: entries,
     error: entriesError,
@@ -21,7 +26,9 @@ export default function App() {
   return (
     <AppWrapper>
       <StyledHeader>Lean Coffee Board</StyledHeader>
+
       <StyledSubHeader>Lean Coffee</StyledSubHeader>
+      <Login onSubmit={handleLogin} />
       <EntryList role="list">
         {entries ? (
           entries.map(({ text, author, _id, tempId }) => (
@@ -37,10 +44,19 @@ export default function App() {
     </AppWrapper>
   );
 
+  function handleLogin(name, color) {
+    const newUser = name;
+    setUserName(newUser);
+
+    const newUserColor = color;
+    setUserColor(newUserColor);
+    console.log(userColor);
+  }
+
   async function handleNewEntry(text) {
     const newEntry = {
       text: text,
-      author: 'Anonymous',
+      author: userName,
       tempId: Math.random(),
     };
 
