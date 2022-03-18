@@ -41,7 +41,7 @@ const FormWrapper = styled.form`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  height: 250px;
+  height: fit-content;
   padding: 20px;
   border-radius: 20px;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
@@ -52,4 +52,5 @@ const FormWrapper = styled.form`
 const CenterBox = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
 `;
