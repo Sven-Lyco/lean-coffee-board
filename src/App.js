@@ -1,11 +1,12 @@
 import useSWR from 'swr';
 import styled from 'styled-components';
+import { useState } from 'react';
+import dayjs from 'dayjs';
 
 import Login from './components/Login';
 import Entry from './components/Entry';
 import EntryForm from './components/EntryForm';
 import LoadingCircle from './components/LoadingCircle';
-import { useState } from 'react';
 
 const fetcher = (...args) => fetch(...args).then(res => res.json());
 
@@ -30,9 +31,14 @@ export default function App() {
         <>
           <EntryList role="list">
             {entries ? (
-              entries.map(({ text, author, _id, tempId, color }) => (
+              entries.map(({ text, author, _id, tempId, color, date }) => (
                 <li key={_id ?? tempId}>
-                  <Entry text={text} author={author} color={color} />
+                  <Entry
+                    text={text}
+                    author={author}
+                    color={color}
+                    date={date}
+                  />
                 </li>
               ))
             ) : (
@@ -60,6 +66,7 @@ export default function App() {
       text: text,
       author: userName,
       color: userColor,
+      date: dayjs().format(' D.MM.YY H:mm'),
       tempId: Math.random(),
     };
 

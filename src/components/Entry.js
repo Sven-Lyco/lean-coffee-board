@@ -3,16 +3,19 @@ import styled from 'styled-components';
 import { VscAccount } from 'react-icons/vsc';
 import { GoClock } from 'react-icons/go';
 
-export default function Entry({ text, author, color }) {
+export default function Entry({ text, author, color, date }) {
   return (
     <Card color={color}>
-      <TimeLogo>
-        <GoClock />
-      </TimeLogo>
-      <AccountLogo color={color}>
-        <VscAccount />
-      </AccountLogo>
-      <Author color={color}>{author}</Author>
+      <InfoWrapper>
+        <AccountWrapper color={color}>
+          <VscAccount />
+          <p color={color}>{author}</p>
+        </AccountWrapper>
+        <TimeWrapper color={color}>
+          <GoClock />
+          <p>{date}</p>
+        </TimeWrapper>
+      </InfoWrapper>
       <p>{text}</p>
     </Card>
   );
@@ -20,6 +23,7 @@ export default function Entry({ text, author, color }) {
 
 const Card = styled.section`
   display: flex;
+  flex-direction: column;
   align-content: space-between;
   padding: 20px;
   max-width: 400px;
@@ -27,28 +31,33 @@ const Card = styled.section`
   height: 100%;
   box-shadow: ${({ color }) => (color ? color : '#999')} 0px 8px 20px -5px,
     ${({ color }) => (color ? color : '#999')} 0px 8px 16px -8px;
-  position: relative;
 `;
 
-const TimeLogo = styled.div`
-  color: ${({ color }) => (color ? color : '#999')};
-  position: absolute;
-  top: 10px;
-  right: 30px;
+const InfoWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
-const AccountLogo = styled.div`
+const TimeWrapper = styled.div`
+  display: flex;
+  margin: 2px 0px;
   color: ${({ color }) => (color ? color : '#999')};
-  position: absolute;
-  top: 10px;
+
+  p {
+    margin: 0px 0px 0px 5px;
+    font-size: smaller;
+  }
 `;
 
-const Author = styled.p`
-  margin: 0;
-  text-transform: capitalize;
-  font-size: 1rem;
+const AccountWrapper = styled.div`
+  display: flex;
   color: ${({ color }) => (color ? color : '#999')};
-  position: absolute;
-  top: 10px;
-  left: 45px;
+
+  p {
+    margin: 0px 0px 0px 5px;
+    text-transform: capitalize;
+    font-size: smaller;
+    color: ${({ color }) => (color ? color : '#999')};
+  }
 `;
