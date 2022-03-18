@@ -41,6 +41,7 @@ const InfoWrapper = styled.div`
 
 const TimeWrapper = styled.div`
   display: flex;
+  align-items: center;
   margin: 2px 0px;
   color: ${({ color }) => (color ? color : '#999')};
 
@@ -52,6 +53,7 @@ const TimeWrapper = styled.div`
 
 const AccountWrapper = styled.div`
   display: flex;
+  align-items: center;
   color: ${({ color }) => (color ? color : '#999')};
 
   p {
