@@ -30,9 +30,9 @@ export default function App() {
       <StyledSubHeader>Lean Coffee</StyledSubHeader>
       <EntryList role="list">
         {entries ? (
-          entries.map(({ text, author, _id, tempId }) => (
+          entries.map(({ text, author, _id, tempId, color }) => (
             <li key={_id ?? tempId}>
-              <Entry text={text} author={author} userColor={userColor} />
+              <Entry text={text} author={author} color={color} />
             </li>
           ))
         ) : (

@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-export default function Entry({ text, author, userColor }) {
+export default function Entry({ text, author, color }) {
   return (
     <Card>
       {text}
-      <Author userColor={userColor}>{author}</Author>
+      <Author color={color}>{author}</Author>
     </Card>
   );
 }
@@ -24,5 +24,5 @@ const Author = styled.p`
   margin: 0;
   text-transform: capitalize;
   font-size: 1rem;
-  color: ${({ userColor }) => (userColor ? userColor : '#999')};
+  color: ${({ color }) => (color ? color : '#999')};
 `;
