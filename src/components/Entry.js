@@ -42,11 +42,11 @@ const InfoWrapper = styled.div`
 const TimeWrapper = styled.div`
   display: flex;
   align-items: center;
-  margin: 2px 0px;
+  margin: 0px;
   color: ${({ color }) => (color ? color : '#999')};
 
   p {
-    margin: 0px 0px 0px 5px;
+    margin: 0px;
     font-size: smaller;
   }
 `;
@@ -54,10 +54,11 @@ const TimeWrapper = styled.div`
 const AccountWrapper = styled.div`
   display: flex;
   align-items: center;
+  margin: 0px;
   color: ${({ color }) => (color ? color : '#999')};
 
   p {
-    margin: 0px 0px 0px 5px;
+    margin: 2px 0px 0px 3px;
     text-transform: capitalize;
     font-size: smaller;
     color: ${({ color }) => (color ? color : '#999')};
