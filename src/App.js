@@ -28,18 +28,18 @@ export default function App() {
       <StyledHeader>Lean Coffee Board</StyledHeader>
 
       <StyledSubHeader>Lean Coffee</StyledSubHeader>
-      <Login onSubmit={handleLogin} />
       <EntryList role="list">
         {entries ? (
           entries.map(({ text, author, _id, tempId }) => (
             <li key={_id ?? tempId}>
-              <Entry text={text} author={author} />
+              <Entry text={text} author={author} userColor={userColor} />
             </li>
           ))
         ) : (
           <LoadingCircle />
         )}
       </EntryList>
+      <Login onSubmit={handleLogin} />
       <EntryForm onSubmit={handleNewEntry} />
     </AppWrapper>
   );
@@ -57,6 +57,7 @@ export default function App() {
     const newEntry = {
       text: text,
       author: userName,
+      color: userColor,
       tempId: Math.random(),
     };
 
@@ -77,7 +78,7 @@ export default function App() {
 const AppWrapper = styled.div`
   display: grid;
   height: 100vh;
-  grid-template-rows: 60px 85px auto 48px;
+  grid-template-rows: 60px 85px auto auto 48px;
 `;
 
 const StyledHeader = styled.h1`
