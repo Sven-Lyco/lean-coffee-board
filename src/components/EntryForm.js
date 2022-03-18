@@ -13,6 +13,7 @@ export default function EntryForm({ onSubmit }) {
         placeholder="Add lean coffee note..."
         type="text"
         autoComplete="off"
+        minLength={3}
         required
       />
       <button id="entry-form-name">

@@ -1,13 +1,18 @@
 import useSWR from 'swr';
 import styled from 'styled-components';
 
+import Login from './components/Login';
 import Entry from './components/Entry';
 import EntryForm from './components/EntryForm';
 import LoadingCircle from './components/LoadingCircle';
+import { useState } from 'react';
 
 const fetcher = (...args) => fetch(...args).then(res => res.json());
 
 export default function App() {
+  const [userColor, setUserColor] = useState('');
+  const [userName, setUserName] = useState('');
+
   const {
     data: entries,
     error: entriesError,
@@ -21,26 +26,40 @@ export default function App() {
   return (
     <AppWrapper>
       <StyledHeader>Lean Coffee Board</StyledHeader>
-      <StyledSubHeader>Lean Coffee</StyledSubHeader>
-      <EntryList role="list">
-        {entries ? (
-          entries.map(({ text, author, _id, tempId }) => (
-            <li key={_id ?? tempId}>
-              <Entry text={text} author={author} />
-            </li>
-          ))
-        ) : (
-          <LoadingCircle />
-        )}
-      </EntryList>
-      <EntryForm onSubmit={handleNewEntry} />
+      {userName && (
+        <>
+          <EntryList role="list">
+            {entries ? (
+              entries.map(({ text, author, _id, tempId, color }) => (
+                <li key={_id ?? tempId}>
+                  <Entry text={text} author={author} color={color} />
+                </li>
+              ))
+            ) : (
+              <LoadingCircle />
+            )}
+          </EntryList>
+        </>
+      )}
+      {!userName && <Login onSubmit={handleLogin} />}
+      {userName && <EntryForm onSubmit={handleNewEntry} />}
     </AppWrapper>
   );
+
+  function handleLogin(name, color) {
+    const newUser = name;
+    setUserName(newUser);
+
+    const newUserColor = color;
+    setUserColor(newUserColor);
+    console.log(userColor);
+  }
 
   async function handleNewEntry(text) {
     const newEntry = {
       text: text,
-      author: 'Anonymous',
+      author: userName,
+      color: userColor,
       tempId: Math.random(),
     };
 
@@ -61,7 +80,7 @@ export default function App() {
 const AppWrapper = styled.div`
   display: grid;
   height: 100vh;
-  grid-template-rows: 60px 85px auto 48px;
+  grid-template-rows: 60px auto 48px;
 `;
 
 const StyledHeader = styled.h1`
@@ -74,24 +93,12 @@ const StyledHeader = styled.h1`
   margin: 0;
 `;
 
-const StyledSubHeader = styled.h2`
-  color: #27322f;
-  padding: 10px;
-  margin: 25px 16px 16px;
-  border-top: 4px solid #27322f;
-
-  &:hover {
-    transition: #00e7c2 0.25s linear;
-  }
-`;
-
 const EntryList = styled.ul`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  grid-auto-rows: 100px;
   overflow-y: auto;
-  list-style: none;
+  display: grid;
   gap: 20px;
-  margin: 0px 0px;
-  padding: 0 20px 12px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  list-style: none;
+  padding: 20px;
+  margin: 0;
 `;
