@@ -42,7 +42,7 @@ export default function App() {
         </>
       )}
       {!userName && <Login onSubmit={handleLogin} />}
-      <EntryForm onSubmit={handleNewEntry} />
+      {userName && <EntryForm onSubmit={handleNewEntry} />}
     </AppWrapper>
   );
 

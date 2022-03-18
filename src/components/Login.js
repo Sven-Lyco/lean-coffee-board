@@ -11,6 +11,7 @@ export default function Login({ onSubmit }) {
           placeholder="Add your Name"
           type="text"
           autoComplete="off"
+          minLength={3}
           required
         ></input>
         <label htmlFor="color">Choose a color:</label>
@@ -19,6 +20,7 @@ export default function Login({ onSubmit }) {
           name="color"
           placeholder="choose your color"
           type="color"
+          defaultValue="#909090"
         ></input>
         <button id="login">Remember me</button>
       </FormWrapper>
@@ -50,5 +52,4 @@ const FormWrapper = styled.form`
 const CenterBox = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 100px;
 `;
