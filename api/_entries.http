@@ -14,6 +14,7 @@ POST {{baseUrl}}/entries
 Content-Type: application/json
 
 {
-  "text": "WSL MongoDB works too!! Awesome!",
-  "author": "Sven"
+  "text": "Hello",
+  "author": "Sven",
+  "date": ""
 }
