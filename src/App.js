@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import dayjs from 'dayjs';
 
-import Login from './components/Login';
-import Entry from './components/Entry';
-import EntryForm from './components/EntryForm';
+import Login from './components/Login/Login';
+import Entry from './components/Entry/Entry';
+import EntryForm from './components/EntryForm/EntryForm';
 import LoadingCircle from './components/LoadingCircle';
 
 const fetcher = (...args) => fetch(...args).then(res => res.json());

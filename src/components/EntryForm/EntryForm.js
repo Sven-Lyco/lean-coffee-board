@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import ScreenReaderOnly from './ScreenReaderOnly';
+import ScreenReaderOnly from '../ScreenReaderOnly';
 
 import { VscAdd } from 'react-icons/vsc';
 
