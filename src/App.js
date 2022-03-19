@@ -38,6 +38,7 @@ export default function App() {
                     author={author}
                     color={color}
                     date={date}
+                    onDeleteEntry={handleDeleteEntry}
                   />
                 </li>
               ))
@@ -52,13 +53,15 @@ export default function App() {
     </AppWrapper>
   );
 
+  async function handleDeleteEntry(_id) {
+    console.log('Deleted');
+  }
+
   function handleLogin(name, color) {
     const newUser = name;
     setUserName(newUser);
-
     const newUserColor = color;
     setUserColor(newUserColor);
-    console.log(userColor);
   }
 
   async function handleNewEntry(text) {
