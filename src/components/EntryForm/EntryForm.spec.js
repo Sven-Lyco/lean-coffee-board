@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import EntryForm from './EntryForm.js';
 
 describe('EntryForm', () => {
-  it('shows a text and the author', () => {
+  it('shows an input and set a text', () => {
     const callback = jest.fn();
     render(<EntryForm onSubmit={callback} />);
 
