@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
 import { VscAccount } from 'react-icons/vsc';
+import { VscTrash } from 'react-icons/vsc';
 import { GoClock } from 'react-icons/go';
 
-export default function Entry({ text, author, color, date }) {
+export default function Entry({ text, author, color, date, onDeleteEntry }) {
   return (
     <Card color={color}>
       <InfoWrapper>
@@ -17,6 +18,9 @@ export default function Entry({ text, author, color, date }) {
         </TimeWrapper>
       </InfoWrapper>
       <p>{text}</p>
+      <DeleteWrapper onClick={onDeleteEntry}>
+        <VscTrash />
+      </DeleteWrapper>
     </Card>
   );
 }
@@ -31,12 +35,27 @@ const Card = styled.section`
   height: 100%;
   box-shadow: ${({ color }) => (color ? color : '#999')} 0px 8px 20px -5px,
     ${({ color }) => (color ? color : '#999')} 0px 8px 16px -8px;
+  position: relative;
 `;
 
 const InfoWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+`;
+
+const AccountWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 0px;
+  color: ${({ color }) => (color ? color : '#999')};
+
+  p {
+    margin: 2px 0px 0px 3px;
+    text-transform: capitalize;
+    font-size: smaller;
+    color: ${({ color }) => (color ? color : '#999')};
+  }
 `;
 
 const TimeWrapper = styled.div`
@@ -51,16 +70,13 @@ const TimeWrapper = styled.div`
   }
 `;
 
-const AccountWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  margin: 0px;
-  color: ${({ color }) => (color ? color : '#999')};
+const DeleteWrapper = styled.div`
+  position: absolute;
+  bottom: 5px;
+  right: 7px;
 
-  p {
-    margin: 2px 0px 0px 3px;
-    text-transform: capitalize;
-    font-size: smaller;
-    color: ${({ color }) => (color ? color : '#999')};
+  &:hover {
+    color: red;
+    cursor: pointer;
   }
 `;
