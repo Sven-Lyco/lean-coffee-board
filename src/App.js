@@ -23,6 +23,7 @@ export default function App() {
   });
 
   if (entriesError) return <h1>Sorry, could not fetch.</h1>;
+  //if (!entries) return <LoadingCircle />
 
   return (
     <AppWrapper>
