@@ -15,9 +15,6 @@ const schema = new mongoose.Schema(
       type: String,
       default: '#c8cbca',
     },
-    date: {
-      type: String,
-    },
   },
   {
     versionKey: false,
