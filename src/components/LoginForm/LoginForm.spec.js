@@ -1,11 +1,11 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import Login from './Login';
+import LoginForm from './LoginForm';
 
 describe('Login', () => {
   it('renders two input fields and a button', () => {
-    render(<Login />);
+    render(<LoginForm />);
 
     const form = screen.getByRole('form', { name: /remember me/i });
     const nameInput = screen.getByLabelText('What is your Name?');
@@ -26,7 +26,7 @@ describe('Login', () => {
 
   it('submits form data when input is filled out', () => {
     const callback = jest.fn();
-    render(<Login onSubmit={callback} />);
+    render(<LoginForm onLogin={callback} />);
 
     const nameInput = screen.getByLabelText('What is your Name?');
     const colorInput = screen.getByLabelText('Choose a color:');
@@ -43,7 +43,7 @@ describe('Login', () => {
 
   it('does not submit form data when input for name is empty', () => {
     const callback = jest.fn();
-    render(<Login onSubmit={callback} />);
+    render(<LoginForm onLogin={callback} />);
 
     const submitButton = screen.getByRole('button', {
       name: /remember me/i,
@@ -54,21 +54,20 @@ describe('Login', () => {
 
   it('takes an optional color that has a default value', () => {
     const callback = jest.fn();
-    render(<Login onSubmit={callback} />);
+    render(<LoginForm onLogin={callback} />);
 
     const nameInput = screen.getByLabelText('What is your Name?', {
       selector: 'input',
     });
-    userEvent.type(nameInput, 'Jane');
-
     const colorInput = screen.getByLabelText('Choose a color:', {
       selector: 'input',
     });
-    fireEvent.input(colorInput, { target: { value: '#ff0033' } });
-
     const submitButton = screen.getByRole('button', {
       name: /remember me/i,
     });
+
+    userEvent.type(nameInput, 'Jane');
+    fireEvent.input(colorInput, { target: { value: '#ff0033' } });
     userEvent.click(submitButton);
 
     expect(callback).toHaveBeenCalledWith('Jane', '#ff0033');

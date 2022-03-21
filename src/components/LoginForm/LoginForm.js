@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-export default function Login({ onSubmit }) {
+export default function LoginForm({ onLogin }) {
   return (
     <CenterBox>
-      <FormWrapper onSubmit={handleSubmit} aria-labelledby="login">
+      <FormWrapper onSubmit={handleLogin} aria-labelledby="login">
         <label htmlFor="name">What is your Name?</label>
         <input
           id="name"
@@ -26,7 +26,7 @@ export default function Login({ onSubmit }) {
     </CenterBox>
   );
 
-  function handleSubmit(event) {
+  function handleLogin(event) {
     event.preventDefault();
     const form = event.target;
     const name = form.elements.name.value;
@@ -34,7 +34,7 @@ export default function Login({ onSubmit }) {
     form.reset();
 
     if (name) {
-      onSubmit(name, color);
+      onLogin(name, color);
     }
   }
 }

@@ -1,4 +1,4 @@
-import Login from './Login.js';
+import Login from './LoginForm.js';
 
 export default {
   title: 'components/Login',
