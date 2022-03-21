@@ -48,8 +48,16 @@ export default function App() {
           </EntryList>
         </>
       )}
-      {!userName && <LoginForm onLogin={handleLogin} />}
-      {userName && <EntryForm onSubmit={handleNewEntry} />}
+      {!userName && (
+        <CenterLogin>
+          <LoginForm onLogin={handleLogin} />
+        </CenterLogin>
+      )}
+      {userName && (
+        <EntryFormWrapper>
+          <EntryForm onSubmit={handleNewEntry} />
+        </EntryFormWrapper>
+      )}
     </AppWrapper>
   );
 
@@ -97,12 +105,12 @@ export default function App() {
 }
 
 const AppWrapper = styled.div`
-  display: grid;
-  height: 100vh;
-  grid-template-rows: 60px auto 48px;
+  display: flex;
+  flex-direction: column;
 `;
 
 const StyledHeader = styled.h1`
+  display: block;
   background-color: #00e7c2;
   color: white;
   text-align: center;
@@ -110,14 +118,28 @@ const StyledHeader = styled.h1`
   font-family: 'Lobster', sans-serif;
   padding: 5px 0px;
   margin: 0;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+`;
+
+const CenterLogin = styled.div`
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const EntryList = styled.ul`
-  overflow-y: auto;
   display: grid;
   gap: 20px;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   list-style: none;
   padding: 20px;
-  margin: 0;
+  margin: 55px 0px 50px 0px;
+`;
+
+const EntryFormWrapper = styled.div`
+  position: fixed;
+  bottom: 0;
 `;

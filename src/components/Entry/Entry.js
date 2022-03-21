@@ -19,16 +19,16 @@ export default function Entry({
           <VscAccount />
           <p color={color}>{author}</p>
         </AccountWrapper>
-        <TimeWrapper color={color}>
-          <GoClock />
-          <p>
-            {createdAt
-              ? dayjs(createdAt).format('DD.MM.YYYY HH:mm')
-              : 'just created'}
-          </p>
-        </TimeWrapper>
       </InfoWrapper>
       <p>{text}</p>
+      <TimeWrapper color={color}>
+        <GoClock />
+        <p>
+          {createdAt
+            ? dayjs(createdAt).format('DD.MM.YYYY HH:mm')
+            : 'just created'}
+        </p>
+      </TimeWrapper>
       <DeleteWrapper onClick={onDeleteEntry}>
         <VscTrash />
       </DeleteWrapper>
@@ -43,7 +43,6 @@ const Card = styled.section`
   padding: 20px;
   max-width: 400px;
   border: 1px solid #ddd;
-  height: 100%;
   box-shadow: ${({ color }) => (color ? color : '#999')} 0px 8px 20px -5px,
     ${({ color }) => (color ? color : '#999')} 0px 8px 16px -8px;
   position: relative;
@@ -70,13 +69,16 @@ const AccountWrapper = styled.div`
 `;
 
 const TimeWrapper = styled.div`
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
   display: flex;
   align-items: center;
   margin: 0px;
   color: ${({ color }) => (color ? color : '#999')};
 
   p {
-    margin: 0px;
+    margin: 2px 0px 0px 3px;
     font-size: smaller;
   }
 `;
