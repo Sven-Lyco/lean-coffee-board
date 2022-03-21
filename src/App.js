@@ -39,7 +39,7 @@ export default function App() {
                     author={author}
                     color={color}
                     date={date}
-                    onDeleteEntry={handleDeleteEntry}
+                    onDeleteEntry={() => handleDeleteEntry(_id)}
                   />
                 </li>
               ))
@@ -55,7 +55,19 @@ export default function App() {
   );
 
   async function handleDeleteEntry(_id) {
-    console.log('Deleted');
+    const filteredEntries = entries.filter(entry => entry._id !== _id);
+
+    mutateEntries(filteredEntries, false);
+
+    await fetch('/api/entries', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ _id }),
+    });
+
+    mutateEntries();
   }
 
   function handleLogin(name, color) {
