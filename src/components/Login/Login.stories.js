@@ -4,7 +4,7 @@ export default {
   title: 'components/Login',
   component: Login,
   argTypes: {
-    onSubmit: 'onSubmit',
+    onLogin: 'onLogin',
   },
 };
 

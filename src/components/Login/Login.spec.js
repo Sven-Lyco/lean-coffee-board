@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import Login from './Login';
@@ -8,8 +8,8 @@ describe('Login', () => {
     render(<Login />);
 
     const form = screen.getByRole('form', { name: /remember me/i });
-    const nameInput = screen.getByLabelText(/what's your name?/i);
-    const colorInput = screen.getByLabelText(/choose a color/i);
+    const nameInput = screen.getByLabelText('What is your Name?');
+    const colorInput = screen.getByLabelText('Choose a color:');
     const submitButton = screen.getByRole('button', {
       name: /remember me/i,
     });
@@ -28,8 +28,8 @@ describe('Login', () => {
     const callback = jest.fn();
     render(<Login onSubmit={callback} />);
 
-    const nameInput = screen.getByLabelText(/what's your name?/i);
-    const colorInput = screen.getByLabelText(/choose a color/i);
+    const nameInput = screen.getByLabelText('What is your Name?');
+    const colorInput = screen.getByLabelText('Choose a color:');
     const submitButton = screen.getByRole('button', {
       name: /remember me/i,
     });
@@ -45,14 +45,32 @@ describe('Login', () => {
     const callback = jest.fn();
     render(<Login onSubmit={callback} />);
 
-    const nameInput = screen.getByLabelText(/what's your name?/i);
     const submitButton = screen.getByRole('button', {
       name: /remember me/i,
     });
+    userEvent.click(submitButton);
+    expect(callback).not.toHaveBeenCalled();
+  });
 
-    userEvent.type(nameInput, 'John');
+  it('takes an optional color that has a default value', () => {
+    const callback = jest.fn();
+    render(<Login onSubmit={callback} />);
+
+    const nameInput = screen.getByLabelText('What is your Name?', {
+      selector: 'input',
+    });
+    userEvent.type(nameInput, 'Jane');
+
+    const colorInput = screen.getByLabelText('Choose a color:', {
+      selector: 'input',
+    });
+    fireEvent.input(colorInput, { target: { value: '#ff0033' } });
+
+    const submitButton = screen.getByRole('button', {
+      name: /remember me/i,
+    });
     userEvent.click(submitButton);
 
-    expect(callback).not.toHaveBeenCalledWith();
+    expect(callback).toHaveBeenCalledWith('Jane', '#ff0033');
   });
 });

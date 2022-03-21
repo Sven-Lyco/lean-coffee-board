@@ -59,10 +59,8 @@ export default function App() {
   }
 
   function handleLogin(name, color) {
-    const newUser = name;
-    setUserName(newUser);
-    const newUserColor = color;
-    setUserColor(newUserColor);
+    setUserName(name);
+    setUserColor(color);
   }
 
   async function handleNewEntry(text) {
