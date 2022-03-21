@@ -19,7 +19,7 @@ export default function LoginForm({ onLogin }) {
           id="color"
           name="color"
           type="color"
-          defaultValue="#909090"
+          defaultValue="#c8cbca"
         ></input>
         <button id="login">Remember me</button>
       </FormWrapper>
