@@ -21,7 +21,7 @@ export default function Entry({
         </AccountWrapper>
         <TimeWrapper color={color}>
           <GoClock />
-          <p>{dayjs(createdAt).format('DD.MM.YYYY HH:MM')}</p>
+          <p>{dayjs(createdAt).format('DD.MM.YYYY HH:mm')}</p>
         </TimeWrapper>
       </InfoWrapper>
       <p>{text}</p>
