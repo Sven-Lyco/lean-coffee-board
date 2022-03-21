@@ -1,10 +1,17 @@
 import styled from 'styled-components';
+import dayjs from 'dayjs';
 
 import { VscAccount } from 'react-icons/vsc';
 import { VscTrash } from 'react-icons/vsc';
 import { GoClock } from 'react-icons/go';
 
-export default function Entry({ text, author, color, date, onDeleteEntry }) {
+export default function Entry({
+  text,
+  author,
+  color,
+  createdAt,
+  onDeleteEntry,
+}) {
   return (
     <Card color={color}>
       <InfoWrapper>
@@ -14,7 +21,7 @@ export default function Entry({ text, author, color, date, onDeleteEntry }) {
         </AccountWrapper>
         <TimeWrapper color={color}>
           <GoClock />
-          <p>{date}</p>
+          <p>{dayjs(createdAt).format('DD.MM.YYYY HH:MM')}</p>
         </TimeWrapper>
       </InfoWrapper>
       <p>{text}</p>

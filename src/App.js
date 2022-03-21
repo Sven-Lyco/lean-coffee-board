@@ -1,7 +1,6 @@
 import useSWR from 'swr';
 import styled from 'styled-components';
 import { useState } from 'react';
-import dayjs from 'dayjs';
 
 import LoginForm from './components/LoginForm/LoginForm';
 import Entry from './components/Entry/Entry';
@@ -32,13 +31,13 @@ export default function App() {
         <>
           <EntryList role="list">
             {entries ? (
-              entries.map(({ text, author, _id, tempId, color, date }) => (
+              entries.map(({ text, author, _id, tempId, color, createdAt }) => (
                 <li key={_id ?? tempId}>
                   <Entry
                     text={text}
                     author={author}
                     color={color}
-                    date={date}
+                    createdAt={createdAt}
                     onDeleteEntry={() => handleDeleteEntry(_id)}
                   />
                 </li>
@@ -80,7 +79,6 @@ export default function App() {
       text: text,
       author: userName,
       color: userColor,
-      date: dayjs().format(' D.MM.YY H:mm'),
       tempId: Math.random(),
     };
 
