@@ -35,7 +35,7 @@ describe('Login', () => {
     });
 
     userEvent.type(nameInput, 'John');
-    userEvent.type(colorInput, '#909090');
+    fireEvent.input(colorInput, { target: { value: '#909090' } });
     userEvent.click(submitButton);
 
     expect(callback).toHaveBeenCalledWith('John', '#909090');

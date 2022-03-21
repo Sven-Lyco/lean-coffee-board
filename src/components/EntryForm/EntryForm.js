@@ -3,6 +3,8 @@ import ScreenReaderOnly from '../ScreenReaderOnly';
 
 import { VscAdd } from 'react-icons/vsc';
 
+const TEXT_MIN_LENGTH = 3;
+
 export default function EntryForm({ onSubmit }) {
   return (
     <StyledForm onSubmit={handleSubmit} aria-labelledby="entry-form-name">
@@ -15,7 +17,7 @@ export default function EntryForm({ onSubmit }) {
         placeholder="Add lean coffee note..."
         type="text"
         autoComplete="off"
-        minLength={3}
+        minLength={TEXT_MIN_LENGTH}
         required
       />
       <button id="entry-form-name">
@@ -28,9 +30,11 @@ export default function EntryForm({ onSubmit }) {
   function handleSubmit(event) {
     event.preventDefault();
     const form = event.target;
-    const inputElement = form.elements['entry-form'];
-    onSubmit(inputElement.value);
-    form.reset();
+    const text = form.elements['entry-form'].value;
+    if (text.length >= TEXT_MIN_LENGTH) {
+      onSubmit(text);
+      form.reset();
+    }
   }
 }
 

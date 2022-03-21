@@ -17,4 +17,13 @@ describe('EntryForm', () => {
 
     expect(callback).toHaveBeenCalledWith('This is a text.');
   });
+  it('has a minLength of 3 for text', () => {
+    const neverCalled = jest.fn();
+    render(<EntryForm onSubmit={neverCalled} />);
+
+    const input = screen.getByLabelText('Entry text');
+    userEvent.type(input, 'AB{enter}'); // only 2 characters, but 3 are required
+
+    expect(neverCalled).not.toHaveBeenCalled();
+  });
 });
