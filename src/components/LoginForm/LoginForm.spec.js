@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import LoginForm from './LoginForm';
 
 describe('Login', () => {
-  it('renders two input fields and a button', () => {
+  it('renders two input fields and a button inside form-element', () => {
     render(<LoginForm />);
 
     const form = screen.getByRole('form', { name: /remember me/i });
