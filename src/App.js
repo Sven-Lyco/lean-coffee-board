@@ -12,7 +12,6 @@ const fetcher = (...args) => fetch(...args).then(res => res.json());
 export default function App() {
   const [userColor, setUserColor] = useState('');
   const [userName, setUserName] = useState('');
-  const [checked, setChecked] = useState(false);
 
   const {
     data: entries,

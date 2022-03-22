@@ -4,7 +4,7 @@ export default {
   title: 'components/Entry',
   component: Entry,
   argTypes: {
-    onDelete: 'onDelete',
+    onDeleteEntry: 'onDelete',
     onCheck: 'onCheck',
   },
 };
@@ -15,6 +15,7 @@ export const Default = Template.bind({});
 Default.args = {
   text: 'This is a text',
   author: 'Jane Doe',
+  color: 'gray',
 };
 export const Checked = Template.bind({});
 Checked.args = {
