@@ -11,4 +11,10 @@ describe('Entry', () => {
     const author = screen.getByText('Jane', { exact: false });
     expect(author).toBeInTheDocument();
   });
+  it('shows a checkbox', () => {
+    render(<Entry />);
+
+    const checkbox = screen.getByRole('checkbox', { name: 'Mark as done' });
+    expect(checkbox).toBeInTheDocument();
+  });
 });

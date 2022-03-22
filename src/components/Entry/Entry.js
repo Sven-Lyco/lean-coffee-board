@@ -5,6 +5,8 @@ import { VscAccount } from 'react-icons/vsc';
 import { VscTrash } from 'react-icons/vsc';
 import { GoClock } from 'react-icons/go';
 
+import ScreenReaderOnly from '../ScreenReaderOnly';
+
 export default function Entry({
   text,
   author,
@@ -19,6 +21,10 @@ export default function Entry({
           <VscAccount />
           <p color={color}>{author}</p>
         </AccountWrapper>
+        <ScreenReaderOnly>
+          <label htmlFor="mark-as-done">Mark as done</label>
+        </ScreenReaderOnly>
+        <input type="checkbox" name="mark-as-done" id="mark-as-done" />
       </InfoWrapper>
       <p>{text}</p>
       <TimeWrapper color={color}>
