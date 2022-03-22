@@ -19,6 +19,14 @@ Content-Type: application/json
   "date": ""
 }
 
+### TOGGLE MARK-AS-DONE
+PATCH {{baseUrl}}/entries/mark-as-done
+Content-Type: application/json
+
+{
+  "_id":""
+}
+
 ### DELETE
 DELETE {{baseUrl}}/entries
 Content-Type: application/json

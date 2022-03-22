@@ -12,6 +12,7 @@ const fetcher = (...args) => fetch(...args).then(res => res.json());
 export default function App() {
   const [userColor, setUserColor] = useState('');
   const [userName, setUserName] = useState('');
+  const [checked, setChecked] = useState(false);
 
   const {
     data: entries,
@@ -31,17 +32,30 @@ export default function App() {
         <>
           <EntryList role="list">
             {entries ? (
-              entries.map(({ text, author, _id, tempId, color, createdAt }) => (
-                <li key={_id ?? tempId}>
-                  <Entry
-                    text={text}
-                    author={author}
-                    color={color}
-                    createdAt={createdAt}
-                    onDeleteEntry={() => handleDeleteEntry(_id)}
-                  />
-                </li>
-              ))
+              entries.map(
+                ({
+                  text,
+                  author,
+                  _id,
+                  tempId,
+                  color,
+                  createdAt,
+                  isChecked,
+                }) => (
+                  <li key={_id ?? tempId}>
+                    <Entry
+                      _id={_id}
+                      text={text}
+                      author={author}
+                      color={color}
+                      createdAt={createdAt}
+                      onDeleteEntry={() => handleDeleteEntry(_id)}
+                      isChecked={isChecked}
+                      onCheck={() => handleCheck(_id)}
+                    />
+                  </li>
+                )
+              )
             ) : (
               <LoadingCircle />
             )}
@@ -68,6 +82,18 @@ export default function App() {
 
     await fetch('/api/entries', {
       method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ _id }),
+    });
+
+    mutateEntries();
+  }
+
+  async function handleCheck(_id) {
+    await fetch('/api/entries/mark-as-done', {
+      method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
       },

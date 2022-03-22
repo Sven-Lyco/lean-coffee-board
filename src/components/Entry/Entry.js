@@ -8,11 +8,14 @@ import { GoClock } from 'react-icons/go';
 import ScreenReaderOnly from '../ScreenReaderOnly';
 
 export default function Entry({
+  _id,
   text,
   author,
   color,
   createdAt,
   onDeleteEntry,
+  onCheck,
+  isChecked,
 }) {
   return (
     <Card color={color}>
@@ -21,10 +24,16 @@ export default function Entry({
           <VscAccount />
           <p color={color}>{author}</p>
         </AccountWrapper>
-        <ScreenReaderOnly>
-          <label htmlFor="mark-as-done">Mark as done</label>
-        </ScreenReaderOnly>
-        <input type="checkbox" name="mark-as-done" id="mark-as-done" />
+        <label htmlFor={'mark-as-done' + _id}>
+          <ScreenReaderOnly>Mark as done</ScreenReaderOnly>
+        </label>
+        <input
+          type="checkbox"
+          name="mark-as-done"
+          id={'mark-as-done' + _id}
+          checked={isChecked}
+          onChange={onCheck}
+        />
       </InfoWrapper>
       <p>{text}</p>
       <TimeWrapper color={color}>
