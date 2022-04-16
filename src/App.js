@@ -22,11 +22,10 @@ export default function App() {
   });
 
   if (entriesError) return <h1>Sorry, could not fetch.</h1>;
-  //if (!entries) return <LoadingCircle />
 
   return (
     <AppWrapper>
-      <StyledHeader>Lean Coffe Board</StyledHeader>
+      <StyledHeader>Lean Coffee Board</StyledHeader>
       {userName && (
         <>
           <EntryList role="list">
