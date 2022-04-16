@@ -5,33 +5,48 @@ import { VscAccount } from 'react-icons/vsc';
 import { VscTrash } from 'react-icons/vsc';
 import { GoClock } from 'react-icons/go';
 
+import ScreenReaderOnly from '../ScreenReaderOnly';
+
 export default function Entry({
+  _id,
   text,
   author,
   color,
   createdAt,
   onDeleteEntry,
+  onCheck,
+  isChecked,
 }) {
   return (
     <Card color={color}>
-      <InfoWrapper>
-        <AccountWrapper color={color}>
-          <VscAccount />
-          <p color={color}>{author}</p>
-        </AccountWrapper>
-      </InfoWrapper>
+      <FlexBetween>
+        <Author color={color}>
+          <VscAccount color={color} /> {author}
+        </Author>
+
+        <label htmlFor={'mark-as-done' + _id}>
+          <ScreenReaderOnly>Mark as done</ScreenReaderOnly>
+        </label>
+        <input
+          type="checkbox"
+          name="mark-as-done"
+          id={'mark-as-done' + _id}
+          checked={isChecked}
+          onChange={onCheck}
+        />
+      </FlexBetween>
       <p>{text}</p>
-      <TimeWrapper color={color}>
-        <GoClock />
-        <p>
-          {createdAt
-            ? dayjs(createdAt).format('DD.MM.YYYY HH:mm')
-            : 'just created'}
-        </p>
-      </TimeWrapper>
-      <DeleteWrapper onClick={onDeleteEntry}>
-        <VscTrash />
-      </DeleteWrapper>
+      <FlexBetween>
+        <TimeWrapper>
+          <GoClock />
+          <p>
+            {createdAt
+              ? dayjs(createdAt).format('DD.MM.YYYY HH:mm')
+              : 'just created'}
+          </p>
+        </TimeWrapper>
+        <TrashButton onClick={onDeleteEntry} />
+      </FlexBetween>
     </Card>
   );
 }
@@ -45,51 +60,48 @@ const Card = styled.section`
   border: 1px solid #ddd;
   box-shadow: ${({ color }) => (color ? color : '#999')} 0px 8px 20px -5px,
     ${({ color }) => (color ? color : '#999')} 0px 8px 16px -8px;
-  position: relative;
 `;
 
-const InfoWrapper = styled.div`
+const FlexBetween = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
 `;
 
-const AccountWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  margin: 0px;
-  color: ${({ color }) => (color ? color : '#999')};
-
-  p {
-    margin: 2px 0px 0px 3px;
-    text-transform: capitalize;
-    font-size: smaller;
-    color: ${({ color }) => (color ? color : '#999')};
-  }
+const Author = styled.p`
+  margin: 0;
+  font-size: 1rem;
+  color: ${p => p.color ?? '#555'};
 `;
 
 const TimeWrapper = styled.div`
-  position: absolute;
-  bottom: 8px;
-  left: 8px;
   display: flex;
   align-items: center;
   margin: 0px;
-  color: ${({ color }) => (color ? color : '#999')};
 
   p {
-    margin: 2px 0px 0px 3px;
+    margin: 0px 0px 0px 3px;
     font-size: smaller;
   }
 `;
 
-const DeleteWrapper = styled.div`
-  position: absolute;
-  bottom: 5px;
-  right: 7px;
-
+const TrashButton = styled.button.attrs(() => ({
+  children: (
+    <>
+      <ScreenReaderOnly>Delete</ScreenReaderOnly>
+      <VscTrash />
+    </>
+  ),
+}))`
+  border: none;
+  background: transparent;
+  width: min-content;
+  padding: 2px 0px 0px 0px;
+  font-size: 1.2rem;
   &:hover {
-    color: red;
-    cursor: pointer;
+    color: crimson;
+  }
+  &:focus:focus-visible {
+    outline: 2px dashed;
   }
 `;
