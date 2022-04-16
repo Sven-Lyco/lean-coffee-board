@@ -26,7 +26,7 @@ export default function App() {
 
   return (
     <AppWrapper>
-      <StyledHeader>Lean Coffee Board</StyledHeader>
+      <StyledHeader>Lean Coffe Board</StyledHeader>
       {userName && (
         <>
           <EntryList role="list">
